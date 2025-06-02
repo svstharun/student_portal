@@ -1,0 +1,110 @@
+﻿@{
+    ViewData["Title"] = "Welcome";
+}
+
+<style>
+    .welcome-banner {
+        background: url('/images/trinity-banner.jpg') no-repeat center center;
+        background-size: cover;
+        color: #fff;
+        padding: 100px 30px;
+        border-radius: 15px;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+    }
+
+        .welcome-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(to bottom right, rgba(0, 33, 71, 0.3), rgba(0, 33, 71, 0.3));
+            backdrop-filter: brightness(1.15);
+            z-index: 0;
+        }
+
+        .welcome-banner .content {
+            position: relative;
+            z-index: 1;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+        }
+
+        .welcome-banner h1 {
+            font-family: 'EB Garamond', serif;
+            font-size: 3.2rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .welcome-banner p {
+            font-size: 1.3rem;
+            font-weight: 300;
+            color: #f1f1f1;
+        }
+
+    .nav-cards {
+        margin-top: 40px;
+        padding: 0 10px;
+    }
+
+        .nav-cards .card {
+            border: none;
+            border-radius: 12px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
+            background: #ffffff;
+            border: 2px solid transparent;
+        }
+
+            .nav-cards .card:hover {
+                transform: translateY(-8px) scale(1.02);
+                box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+                border-color: #007bff;
+                background: #f8f9fa;
+            }
+
+        .nav-cards .btn {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .nav-cards .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .nav-cards .btn-outline-primary:hover {
+            background-color: #007bff;
+            color: white;
+        }
+</style>
+
+<div class="welcome-banner text-center">
+    <div class="content">
+        <h1>Welcome to the Trinity College Student Portal</h1>
+        <p>Manage student records with ease and elegance</p>
+    </div>
+</div>
+
+<div class="nav-cards">
+    <div class="row justify-content-center g-4 mt-4">
+        <div class="col-md-4">
+            <div class="card p-4 text-center">
+                <h4 class="mb-3">➕ Add New Student</h4>
+                <p>Register a new student into the system.</p>
+                <a asp-controller="Students" asp-action="Create" class="btn btn-primary w-100">Add Student</a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card p-4 text-center">
+                <h4 class="mb-3">📋 View All Students</h4>
+                <p>Browse, edit, or delete existing student records.</p>
+                <a asp-controller="Students" asp-action="Index" class="btn btn-outline-primary w-100">View Students</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

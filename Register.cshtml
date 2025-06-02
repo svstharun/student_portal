@@ -1,0 +1,66 @@
+﻿@model StudentPortalDBFirst.Models.RegisterViewModel
+
+@{
+    Layout = "~/Views/Shared/_LoginRegisterLayout.cshtml";
+    ViewData["Title"] = "Register";
+}
+
+<div class="container mt-5" style="max-width: 450px;">
+    <div class="bg-light p-4 rounded shadow">
+        <h2 class="text-center mb-4">Register</h2>
+
+        @if (ViewBag.ErrorMessage != null)
+        {
+            <div class="alert alert-danger">@ViewBag.ErrorMessage</div>
+        }
+
+        <form asp-action="Register" method="post">
+            <div class="mb-3">
+                <label asp-for="FirstName" class="form-label"></label>
+                <input asp-for="FirstName" class="form-control" placeholder="Enter first name" />
+                <span asp-validation-for="FirstName" class="text-danger small"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="LastName" class="form-label"></label>
+                <input asp-for="LastName" class="form-control" placeholder="Enter last name" />
+                <span asp-validation-for="LastName" class="text-danger small"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Username" class="form-label"></label>
+                <input asp-for="Username" class="form-control" placeholder="Choose a username" />
+                <span asp-validation-for="Username" class="text-danger small"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Email" class="form-label"></label>
+                <input asp-for="Email" class="form-control" type="email" placeholder="Email address" />
+                <span asp-validation-for="Email" class="text-danger small"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Mobile" class="form-label"></label>
+                <input asp-for="Mobile" class="form-control" placeholder="Mobile number" />
+                <span asp-validation-for="Mobile" class="text-danger small"></span>
+            </div>
+
+            <!-- Plain password input for hashing -->
+            <div class="mb-3">
+                <label for="Password" class="form-label">Password</label>
+                <input type="password" name="Password" class="form-control" placeholder="Create a password" required />
+            </div>
+
+            <div class="mb-3">
+                <label for="ConfirmPassword" class="form-label">Confirm Password</label>
+                <input type="password" name="ConfirmPassword" class="form-control" placeholder="Confirm your password" required />
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Register</button>
+        </form>
+
+        <div class="text-center mt-3">
+            <a asp-action="Login">Already have an account? Login</a>
+        </div>
+    </div>
+</div>
