@@ -1,0 +1,76 @@
+﻿@model StudentPortalDBFirst.Models.Students  
+                                          @* ......this View is Binded with Students Model..... *@
+@{
+    ViewData["Title"] = "Add Student";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center fw-bold mb-4">Add Student</h2>
+
+    <div class="row justify-content-center">
+        <div class="col-md-10 col-lg-8">
+            <form asp-action="Create" method="post" class="p-4 shadow rounded bg-white">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label asp-for="StudentName" class="form-label">Student Name</label>
+                        <input asp-for="StudentName" class="form-control" />
+                        <span asp-validation-for="StudentName" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="Email" class="form-label">Email</label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                </div>
+  
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label asp-for="PhoneNumber" class="form-label">Phone Number</label>
+                        <input asp-for="PhoneNumber" class="form-control" />
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="CollegeName" class="form-label">College Name</label>
+                        <select asp-for="CollegeName" class="form-select">
+                            <option value="">Select College</option>
+                            <option value="CBIT College of Engineering">CBIT College of Engineering</option>
+                            <option value="Indian Institute Of Technology Delhi">Indian Institute Of Technology Delhi</option>
+                            <option value="Trinity College, Cambridge">Trinity College, Cambridge</option>
+                        </select>
+                        <span asp-validation-for="CollegeName" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Address" class="form-label">Address</label>
+                    <textarea asp-for="Address" class="form-control" rows="3"></textarea>
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label d-block">Gender</label>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" asp-for="Gender" value="Male" />
+                        <label class="form-check-label">Male</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" asp-for="Gender" value="Female" />
+                        <label class="form-check-label">Female</label>
+                    </div>
+                    <span asp-validation-for="Gender" class="text-danger d-block mt-1"></span>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary px-4 me-2">Submit</button>
+                    <button type="reset" class="btn btn-outline-secondary px-4">Clear</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

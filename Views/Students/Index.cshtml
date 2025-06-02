@@ -1,0 +1,118 @@
+﻿@model IEnumerable<StudentPortalDBFirst.Models.Students>
+@{
+    ViewData["Title"] = "Student Records";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="fw-bold text-primary">Student Records</h2>
+        <a class="btn btn-success" asp-action="Index">
+            <i class="bi bi-plus-circle"></i> Add New Student
+        </a>
+    </div>
+
+    <div class="mb-3">
+        <input type="text" class="form-control" id="searchInput" placeholder="Search by name or college...">
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-hover table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.StudentName)</th>
+                    <th>@Html.DisplayNameFor(model => model.Email)</th>
+                    <th>@Html.DisplayNameFor(model => model.PhoneNumber)</th>
+                    <th>@Html.DisplayNameFor(model => model.CollegeName)</th>
+                    <th>@Html.DisplayNameFor(model => model.Address)</th>
+                    <th>@Html.DisplayNameFor(model => model.Gender)</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="studentTableBody">
+                @if (Model != null && Model.Any())
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.StudentName</td>
+                            <td>@item.Email</td>
+                            <td>@item.PhoneNumber</td>
+                            <td><span class="badge bg-info text-dark">@item.CollegeName</span></td>
+                            <td>@item.Address</td>
+                            <td>
+                                @if (item.Gender == "Male")
+                                {
+                                    <span class="badge bg-primary"><i class="bi bi-gender-male "></i> Male</span>
+                                }
+                                else if (item.Gender == "Female")
+                                {
+                                    <span class="badge bg-danger"><i class="bi bi-gender-female"></i> Female</span>
+
+                                }
+                            </td>
+                            <td>
+                                <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                                <a class="btn btn-sm btn-info text-white" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                                <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr><td colspan="7" class="text-center">No student records found.</td></tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <nav>
+        <ul class="pagination justify-content-center" id="pagination"></ul>
+    </nav>
+</div>
+
+@section Scripts {
+    <script>
+        const rowsPerPage = 5;
+        let currentPage = 1;
+
+        const tableBody = document.getElementById("studentTableBody");
+        const rows = tableBody.querySelectorAll("tr");
+        const pagination = document.getElementById("pagination");
+
+        function displayRows() {
+            rows.forEach((row, index) => {
+                row.style.display = (index >= (currentPage - 1) * rowsPerPage && index < currentPage * rowsPerPage) ? "" : "none";
+            });
+        }
+
+        function setupPagination() {
+            const pageCount = Math.ceil(rows.length / rowsPerPage);
+            pagination.innerHTML = "";
+            for (let i = 1; i <= pageCount; i++) {
+                const li = document.createElement("li");
+                li.className = `page-item ${i === currentPage ? 'active' : ''}`;
+                li.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+                li.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    currentPage = i;
+                    displayRows();
+                    setupPagination();
+                });
+                pagination.appendChild(li);
+            }
+        }
+
+        document.getElementById("searchInput").addEventListener("input", function () {
+            const query = this.value.toLowerCase();
+            rows.forEach(row => {
+                const cells = row.querySelectorAll("td");
+                const match = [...cells].some(cell => cell.textContent.toLowerCase().includes(query));
+                row.style.display = match ? "" : "none";
+            });
+        });
+
+        displayRows();
+        setupPagination();
+    </script>
+}

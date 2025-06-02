@@ -1,0 +1,31 @@
+﻿@model StudentPortalDBFirst.Models.UsersMaster
+@{
+    Layout = "~/Views/Shared/_LoginRegisterLayout.cshtml";
+    ViewData["Title"] = "Just Login Man";
+}
+
+
+<div class="container mt-5" style="max-width: 400px;">
+
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div class="alert alert-danger">@ViewBag.ErrorMessage</div>
+    }
+        
+   <form asp-action="Login" method="post">
+        <div class="mb-3">
+            <label asp-for="Username" class="form-label">Username</label>
+            <input asp-for="Username" class="form-control" required />
+        </div>
+        <div class="mb-3">
+            <label for="Password" class="form-label">Password</label>
+            <input type="password" class="form-control" name="Password" required />
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Login</button>
+    </form>
+
+    <div class="text-center mt-3">
+        <a asp-action="Register">Don't have an account? Register</a>
+    </div>
+ 
+</div>
